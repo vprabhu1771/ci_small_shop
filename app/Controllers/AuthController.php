@@ -79,7 +79,7 @@ class AuthController extends BaseController
 
         // Define validation rules
         $validationRules = [
-            'name' => 'required',
+            // 'name' => 'required',
             'email' => 'required|valid_email',
             'password' => 'required|min_length[6]',
             'confirmPassword' => 'required|matches[password]',
@@ -115,7 +115,7 @@ class AuthController extends BaseController
             session()->setFlashdata('success', 'User registered successfully');
 
             // Redirect or return response
-            return redirect()->to('/frontend/auth/login')->with('success', 'Registration successful!');    
+            return redirect()->to('/login')->with('success', 'Registration successful!');    
         } 
         catch (ValidationException $e) {
             // Validation failed, return errors

@@ -9,16 +9,11 @@
                 <a class="nav-link" href="<?= site_url('/') ?>">Home <span class="sr-only">(current)</span></a>
             </li>
             
-            <?php if (!session()->get('isLoggedIn')) : ?>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?= site_url('login') ?>">Login / Register</a>
-                </li>
-            <?php endif; ?>
-            
-            <?php if (session()->get('isLoggedIn')) : ?>
-                <li class="nav-item dropdown">
+            <?php if(session()->has('user')): ?>
+                 <!-- User is logged in -->
+                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <?= session()->get('user_name') ?> <!-- Display the user's name -->
+                        <?= session()->get('user')['email'] ?> <!-- Display the user's name -->
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="<?= site_url('cart') ?>">Cart</a></li>
@@ -26,6 +21,12 @@
                         <li><a class="dropdown-item" href="<?= site_url('profile') ?>">Profile</a></li>
                         <li><a class="dropdown-item" href="<?= site_url('logout') ?>">Logout</a></li>
                     </ul>
+                </li>
+                
+            <?php else: ?>
+                 <!-- User is not logged in -->
+                <li class="nav-item">
+                    <a class="nav-link" href="<?= site_url('login') ?>">Login / Register</a>
                 </li>
             <?php endif; ?>
         </ul>
