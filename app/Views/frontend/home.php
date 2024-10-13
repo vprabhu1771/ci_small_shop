@@ -8,6 +8,19 @@ Home
 
 <div class="container mt-4">
 
+    <!-- Error and Success Messages -->
+    <?php if (session()->getFlashdata('error')): ?>
+        <div class="alert alert-danger" role="alert">
+            <?= session()->getFlashdata('error') ?>
+        </div>
+    <?php endif; ?>
+
+    <?php if (session()->getFlashdata('success')): ?>
+        <div class="alert alert-success" role="alert">
+            <?= session()->getFlashdata('success') ?>
+        </div>
+    <?php endif; ?>
+
     <!-- Search and Filter Form -->
     <form method="GET" action="<?= site_url('home/index') ?>" class="mb-4">
         <div class="row mb-3">
@@ -39,10 +52,19 @@ Home
                         <div class="card-body">
                             <h5 class="card-title"><?= esc($item['name']) ?></h5>                            
                             <p class="card-text"><strong>$<?= esc($item['price']) ?></strong></p>
-                            <a href="<?= site_url('cart') ?>" class="btn btn-primary">Add to Cart</a>
+                            
                         </div>
+                        <!-- Add to Cart Form -->
+                        <form action="<?= route_to('cart.add_to_cart') ?>" method="POST">
+                            <?= csrf_field() ?>
+                            <input type="hidden" name="product_id" value="<?= esc($item['id']) ?>">
+                            <div class="d-flex align-items-center mb-3">
+                                <input type="number" name="qty" class="form-control w-25" value="1" min="1">
+                                <button type="submit" class="btn btn-primary ms-3">Add to Cart</button>
+                            </div>
+                        </form>
                     </div>
-                </a>
+                </a>                
             </div>
         <?php endforeach; ?>
     </div>

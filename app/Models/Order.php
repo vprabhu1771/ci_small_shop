@@ -17,6 +17,7 @@ class Order extends Model
         'total_amount',
         'status',
         'payment_method',
+        'payment_id'
     ];
 
     protected bool $allowEmptyInserts = false;
@@ -48,4 +49,12 @@ class Order extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    // Method to get order items for this order
+    public function getOrderItems($orderId)
+    {
+        $orderItemModel = new \App\Models\OrderItem();
+
+        return $orderItemModel->where('order_id', $orderId)->findAll();
+    }
 }

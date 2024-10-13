@@ -83,7 +83,7 @@
 
         <!-- Checkout Button -->
         <div class="mt-4">
-            <form action="<?= route_to('checkout') ?>" method="POST" class="mt-4">
+            <form action="<?= route_to('order.checkout') ?>" method="POST" class="mt-4">
                 <?= csrf_field() ?>
                 <button type="submit" class="btn btn-primary">Proceed to Checkout</button>
             </form>

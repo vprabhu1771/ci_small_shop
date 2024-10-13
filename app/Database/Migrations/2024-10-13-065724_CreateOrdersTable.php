@@ -36,6 +36,11 @@ class CreateOrdersTable extends Migration
                 'constraint' => 50,
                 'null'       => false,
             ],
+            'payment_id' => [
+                'type'       => 'VARCHAR',
+                'constraint' => 255,
+                'null'       => true,
+            ],
             'created_at timestamp default current_timestamp',
             'updated_at timestamp default current_timestamp on update current_timestamp'
         ]);

@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class OrderItem extends Model
 {
-    protected $table            = 'orderitems';
+    protected $table            = 'order_items';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
@@ -63,4 +63,16 @@ class OrderItem extends Model
         $orderModel = new \App\Models\Order();
         return $orderModel->find($orderId);
     }
+
+    // Method to join with products (if needed)
+    public function getOrderItemsWithProducts($orderId)
+    {
+        return $this->select('order_items.*, products.name as product_name')
+                    ->join('products', 'products.id = order_items.product_id')
+                    ->where('order_items.order_id', $orderId)
+                    ->findAll();
+    }
+    
+
+    
 }
