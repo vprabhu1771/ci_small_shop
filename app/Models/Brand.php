@@ -10,6 +10,7 @@ class Brand extends Model
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
+    // protected $returnType = 'object'; // Change this to 'object'
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
@@ -47,7 +48,7 @@ class Brand extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function getLogoImage()
+    public function getImage()
     {
         // Get the domain URL from .env, fallback to base_url() if not set
         $domainUrl = env('DOMAIN_URL', base_url());
@@ -56,7 +57,7 @@ class Brand extends Model
         $imagePath = $this->image_path ?? 'no_image_available.jpg';
 
         // Return the full URL to the image
-        return $domainUrl . '/' . $imagePath;
+        return $domainUrl . $imagePath;
     }
 
 }
