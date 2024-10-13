@@ -23,7 +23,7 @@
 <body>
 
     <!-- Include the Header partial -->
-    <?= $this->include('frontend/layout/header') ?>
+    <?= $this->include('frontend/layout/topbar') ?>
 
 
 
