@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\Product; // Ensure you create this model
 use App\Models\Category; // Ensure you create this model
+use App\Models\Brand; // Ensure you create this model
 use CodeIgniter\Controller;
 
 class HomeController extends Controller
@@ -51,16 +52,25 @@ class HomeController extends Controller
     public function show($id)
     {
         $productModel = new Product();
-
-        // Attempt to find the product by ID
         $product = $productModel->find($id);
 
-        if ($product) {
-            // Product found, load the view
-            return view('frontend/show', ['product' => $product]);
-        } else {
-            // Handle the case where the product is not found
-            return redirect()->to('products/index')->with('error', 'Product not found.');
+        if (!$product) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound('Product not found');
         }
+
+        // Load category and brand models
+        $categoryModel = new Category();
+        $brandModel = new Brand();
+
+        // Fetch category and brand by their IDs
+        $category = $categoryModel->find($product['category_id']);
+        $brand = $brandModel->find($product['brand_id']);
+
+        // Pass the product and its associated category and brand to the view
+        return view('frontend/show', [
+            'product' => $product,
+            'category' => $category,
+            'brand' => $brand,
+        ]);
     }
 }
