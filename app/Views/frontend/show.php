@@ -19,6 +19,19 @@
 </style>
 
 <div class="container my-5">
+
+    <!-- Error and Success Messages -->
+    <?php if (session()->getFlashdata('error')): ?>
+        <div class="alert alert-danger" role="alert">
+            <?= session()->getFlashdata('error') ?>
+        </div>
+    <?php endif; ?>
+
+    <?php if (session()->getFlashdata('success')): ?>
+        <div class="alert alert-success" role="alert">
+            <?= session()->getFlashdata('success') ?>
+        </div>
+    <?php endif; ?>
     <div class="row">
         <!-- Product Image -->
         <div class="col-md-6">
