@@ -1,6 +1,10 @@
 # ci_small_shop
 
 ```
+DOMAIN_URL=http://yourdomain.com
+```
+
+```
 RAZORPAY_KEY_ID=your_key_id_here
 RAZORPAY_KEY_SECRET=your_key_secret_here
 RAZORPAY_CURRENCY=INR
